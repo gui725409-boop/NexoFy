@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2457f5">
+<title>NexoFy</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--cv:#f4f5f8;--tx:#101828;--mt:#667085;--ac:#2457f5;--acs:#e8eefe;--lv:#ff4d5e;--ok:#12b76a;--bd:#eaecf0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root{--bg:#13151b;--cv:#0b0c10;--tx:#f2f4f7;--mt:#98a2b3;--acs:#1c2745;--bd:#23262f}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;height:100%}
+body{background:var(--cv);color:var(--tx);font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;font-size:15px}
+button{font-family:inherit;cursor:pointer}
+header{background:var(--bg);padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.04em}.logo i{font-style:normal;color:var(--ac)}
+.av{position:relative;width:40px;height:40px;border-radius:50%;background:var(--ac);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex:none;border:0}
+.av.sm{width:34px;height:34px;font-size:14px}.av.lg{width:84px;height:84px;font-size:34px}
+.av.on:after{content:"";position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:var(--ok);border:2px solid var(--bg)}
+.seg{display:flex;background:var(--bg);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:3;overflow-x:auto;scrollbar-width:none}
+.seg button{flex:1;border:0;background:none;padding:12px 10px;color:var(--mt);font-weight:500;font-size:14px;border-bottom:2.5px solid transparent;white-space:nowrap}
+.seg button.on{color:var(--ac);font-weight:700;border-color:var(--ac)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 16px 10px;background:var(--bg);border-bottom:1px solid var(--bd);scrollbar-width:none}
+.chip{flex:none;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:500}
+.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.srch{background:var(--bg);padding:10px 16px 6px}.srch input{margin:0;background:var(--cv);border-color:transparent;padding:11px 14px}
+main{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column}main>*{flex:none}main>.fill{flex:1;min-height:0}
+.pad{padding:16px}
+nav{display:flex;align-items:center;background:var(--bg);border-top:1px solid var(--bd);padding:4px 4px 6px}
+nav button{position:relative;flex:1;border:0;background:none;color:var(--mt);font-size:11px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0}
+nav button.on{color:var(--ac);font-weight:700}
+nav button.has:after{content:"";position:absolute;top:4px;left:calc(50% + 6px);width:9px;height:9px;border-radius:50%;background:var(--lv)}
+nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
+.post{background:var(--bg);margin-bottom:8px}
+.who{display:flex;align-items:center;gap:10px;padding:12px 16px;border:0;background:none;color:var(--tx);width:100%;text-align:left;font-size:15px}
+.who b{display:block;font-weight:700}.mt{color:var(--mt);font-size:13px}
+.post video{width:100%;max-height:68vh;background:#000;display:block}
+.cap{padding:12px 16px 4px;font-weight:500;line-height:1.45}.ht{color:var(--ac);font-weight:700}
+.act{display:flex;align-items:center;gap:16px;padding:6px 16px 14px}
+.ib{border:0;background:none;color:var(--mt);font-weight:700;display:flex;align-items:center;gap:6px;font-size:14px;padding:4px 0}
+.ib.on{color:var(--lv)}.ib.sv.on{color:var(--ac)}.ib svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none}.ib.on svg{fill:currentColor}
+.tag{background:var(--acs);color:var(--ac);border-radius:8px;padding:3px 9px;font-size:12px;font-weight:700;margin-left:auto}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;margin-bottom:12px;outline:0}
+input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acs)}
+.lbl{font-weight:700;margin:4px 0 8px;display:block}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:12px;padding:14px 18px;font-weight:700;font-size:15px;width:100%}
+.btn.sec{background:var(--acs);color:var(--ac)}.btn.red{background:var(--lv)}.btn.sm{width:auto;padding:8px 14px;font-size:13px}.btn:disabled{opacity:.5}
+.gbtn{background:var(--bg);color:var(--tx);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;gap:10px}
+.drop{border:2px dashed var(--bd);border-radius:16px;background:var(--bg);padding:34px 16px;text-align:center;color:var(--mt);margin-bottom:14px;width:100%;font-size:15px}
+.drop b{display:block;color:var(--tx);font-size:16px;margin-bottom:4px}
+.bar{height:8px;border-radius:4px;background:var(--bd);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac);width:0}
+.empty{text-align:center;color:var(--mt);padding:56px 24px;line-height:1.5}.empty b{display:block;color:var(--tx);font-size:16px;margin-bottom:4px}
+.item{display:flex;align-items:center;gap:12px;padding:12px 16px;border:0;border-bottom:1px solid var(--bd);background:var(--bg);width:100%;color:var(--tx);font-size:15px;text-align:left}
+.item b{display:block;font-weight:700}.grow{flex:1;min-width:0}.item .grow span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{background:var(--lv);color:#fff;border-radius:10px;min-width:20px;height:20px;padding:0 6px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.live{display:inline-flex;align-items:center;gap:5px;color:var(--lv);font-weight:700;font-size:13px}
+.live:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lv)}
+.msg{padding:9px 13px;border-radius:18px 18px 18px 4px;background:var(--bg);margin-bottom:8px;max-width:82%;word-wrap:break-word;border:1px solid var(--bd)}
+.msg.mine{background:var(--ac);color:#fff;margin-left:auto;border-radius:18px 18px 4px 18px;border-color:var(--ac)}
+.msg small{display:block;opacity:.7;font-size:11px;margin-top:2px}
+.row{display:flex;gap:8px;align-items:center}.row input{margin:0}.row .btn{width:auto}
+.emo{display:flex;gap:6px;padding:8px 16px 0;background:var(--bg)}.emo button{border:0;background:var(--cv);border-radius:20px;font-size:20px;padding:4px 12px}
+.stats{display:flex;justify-content:center;gap:26px;margin:14px 0}.stats b{display:block;font-size:18px}
+.err{color:var(--lv);font-size:14px;margin:0 0 12px}
+.gate{position:fixed;inset:0;background:var(--bg);z-index:9;display:flex;flex-direction:column;justify-content:center;padding:32px 24px;overflow-y:auto}
+.gate .logo{font-size:36px;margin-bottom:8px}.gate p{color:var(--mt);margin:0 0 24px;line-height:1.5}
+#sheet{position:fixed;inset:0;background:rgba(16,24,40,.5);z-index:8;display:flex;align-items:flex-end}
+.sh{background:var(--bg);width:100%;max-height:75vh;border-radius:20px 20px 0 0;padding:16px;display:flex;flex-direction:column;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.cl{overflow-y:auto;flex:1;margin-bottom:10px}.cm{display:flex;gap:10px;margin-bottom:12px}.cm div{min-width:0;word-wrap:break-word}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="gate" id="gate"><div class="logo">Nexo<i>Fy</i></div><p>Carregando…</p></div>
+<header><div class="logo">Nexo<i>Fy</i></div><button class="av" id="meBtn" aria-label="Meu perfil"></button></header>
+<main id="main"></main>
+<nav id="nav">
+<button data-t="feed" class="on"><svg viewBox="0 0 24 24"><polygon points="7 4 20 12 7 20"/></svg>Vídeos</button>
+<button data-t="post"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Postar</button>
+<button data-t="live"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M7.5 7.5a6.4 6.4 0 0 0 0 9M16.5 7.5a6.4 6.4 0 0 1 0 9"/></svg>Lives</button>
+<button data-t="chat"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 4v-4H4z"/></svg>Mensagens</button>
+</nav>
+<div id="sheet" class="hide"></div>
+
+<script type="module">
+/* =====================================================================
+   CONFIGURAÇÃO: cole aqui os dados do seu projeto (veja o LEIAME.md)
+   ===================================================================== */
+const FIREBASE = {
+  apiKey: "COLE_AQUI",
+  authDomain: "COLE_AQUI",
+  projectId: "COLE_AQUI",
+  appId: "COLE_AQUI"
+};
+// Envio de vídeos (Cloudinary, plano gratuito): cloud name e upload preset "unsigned"
+const CLOUDINARY = { cloud: "COLE_AQUI", preset: "COLE_AQUI" };
+/* ===================================================================== */
+
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,collection,doc,setDoc,addDoc,deleteDoc,updateDoc,onSnapshot,query,where,orderBy,limit} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const CATS=["Humor","Música","Games","Esportes","Educação","Outros"],EMO=["😂","❤️","🔥","👍","😮"];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=s=>esc(s).replace(/#([\p{L}\d_]+)/gu,'<a class="ht" data-q="$1">#$1</a>');
+const ini=(n,c="",on=false)=>`<span class="av ${c} ${on?"on":""}">${esc((n||"?").trim().charAt(0).toUpperCase())}</span>`;
+const ago=t=>{const s=(Date.now()-t)/1000;return s<60?"agora":s<3600?"há "+Math.floor(s/60)+" min":s<86400?"há "+Math.floor(s/3600)+" h":"há "+Math.floor(s/86400)+" d"};
+const hm=t=>new Date(t).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+
+if(!String(FIREBASE.apiKey).startsWith("AIza")){
+  $("#gate").innerHTML=`<div class="logo">Nexo<i>Fy</i></div><p>Falta configurar o app. Abra o arquivo <b>index.html</b>, cole os dados do Firebase e do Cloudinary no começo do código e siga o LEIAME.md.</p>`;
+  throw new Error("Configure FIREBASE em index.html");
+}
+const app=initializeApp(FIREBASE),auth=getAuth(app),fdb=getFirestore(app);
+const C=n=>collection(fdb,n),D=(n,id)=>doc(fdb,n,id);
+const sn=(q,fn)=>onSnapshot(q,s=>fn(s.docs.map(d=>({...d.data(),id:d.id}))),e=>console.error("Firestore:",e.code,e.message));
+
+let user=null,uid="",me=null,ready=false,started=false,tab="feed",prevTab="feed",profUid=null,dm=null,picked=null,pickCat="Outros",liveCat="Outros";
+let videos=[],lives=[],people=[],msgs=[],likes=[],saves=[],follows=[],comments=[],catF="Todos",search="",sheetVid=null,drawPeople=null;
+let gen=[],dmA=[],dmB=[],liveMsgs=[],unsubLC=null,uploading=false;
+const sub={feed:"foryou",post:"gal",live:"watch",chat:"convs"};
+let localStream=null,liveRef=null,liveBeat=null,liveErr="",watching=null,pcs={},viewPc=null,viewStream=null;
+const tid=Math.random().toString(36).slice(2,10);
+const ICE={iceServers:[{urls:"stun:stun.l.google.com:19302"}]};
+let LR={};try{LR=JSON.parse(localStorage.getItem("nx_lr")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("nx_lr",JSON.stringify(LR))}catch(e){}};
+const online=u=>u&&Date.now()-(u.seen||0)<130000;
+const byUid=u=>people.find(p=>p.uid===u);
+const likeCount=id=>likes.filter(l=>l.vid===id).length,liked=id=>likes.some(l=>l.vid===id&&l.uid===uid),saved=id=>saves.some(l=>l.vid===id&&l.uid===uid);
+const following=u=>follows.some(f=>f.a===uid&&f.b===u);
+const unread=k=>msgs.filter(x=>x.chat===k&&x.uid!==uid&&x.ts>(LR[k]||0)).length;
+const updateBadge=()=>document.querySelector('[data-t=chat]').classList.toggle("has",msgs.some(x=>x.b===uid&&x.ts>(LR[x.chat]||0)));
+const updateHead=()=>{if(me)$("#meBtn").textContent=me.name.trim().charAt(0).toUpperCase()};
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>go(b.dataset.t));
+$("#meBtn").onclick=()=>go("me");
+function go(t){tab=t;dm=null;document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));render()}
+function openUser(u){prevTab=tab;tab="user";profUid=u;dm=null;document.querySelectorAll("nav button").forEach(x=>x.classList.remove("on"));render()}
+const seg=items=>`<div class="seg">`+items.map(([id,l])=>`<button data-s="${id}" class="${sub[tab]===id?"on":""}">${l}</button>`).join("")+`</div>`;
+const bindSeg=()=>document.querySelectorAll(".seg button[data-s]").forEach(b=>b.onclick=()=>{sub[tab]=b.dataset.s;dm=null;render()});
+
+/* ---------- LOGIN COM GOOGLE ---------- */
+function showLogin(msg=""){
+  $("#gate").classList.remove("hide");
+  $("#gate").innerHTML=`<div class="logo">Nexo<i>Fy</i></div><p>Vídeos, lives e conversas em um só lugar. Entre com sua conta Google para começar.</p>
+  <button class="btn gbtn" id="gl"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3A12 12 0 1 1 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7A20 20 0 1 0 44 24c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8A12 12 0 0 1 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7A20 20 0 0 0 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2A12 12 0 0 1 12.7 28l-6.5 5A20 20 0 0 0 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3a12 12 0 0 1-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>Entrar com Google</button><p class="err" id="ge" style="margin-top:14px">${esc(msg)}</p>`;
+  $("#gl").onclick=async()=>{
+    const p=new GoogleAuthProvider();
+    try{await signInWithPopup(auth,p)}
+    catch(e){if(e.code==="auth/popup-blocked"||e.code==="auth/operation-not-supported-in-this-environment")signInWithRedirect(auth,p);else if(e.code!=="auth/popup-closed-by-user"&&e.code!=="auth/cancelled-popup-request")$("#ge").textContent="Não foi possível entrar ("+e.code+"). Veja se o domínio do site está em Authorized domains no Firebase."}
+  };
+}
+function showSetup(){
+  $("#gate").classList.remove("hide");
+  $("#gate").innerHTML=`<div class="logo">Nexo<i>Fy</i></div><p>Olá${user.displayName?", "+esc(user.displayName.split(" ")[0]):""}! Crie seu perfil público.</p>
+  <input id="gn" maxlength="24" placeholder="Seu nome" value="${esc((user.displayName||"").slice(0,24))}"><input id="gh" maxlength="20" placeholder="@usuário" autocapitalize="none" autocomplete="off">
+  <div id="ge"></div><button class="btn" id="gok">Entrar no NexoFy</button><button class="btn sec" id="lo" style="margin-top:10px">Usar outra conta</button>`;
+  $("#lo").onclick=()=>signOut(auth);
+  $("#gok").onclick=async()=>{
+    const n=$("#gn").value.trim(),h=$("#gh").value.trim().replace(/^@/,"").toLowerCase(),e=$("#ge");
+    if(n.length<2){e.innerHTML=`<p class="err">Digite seu nome.</p>`;return}
+    if(!/^[a-z0-9_.]{3,20}$/.test(h)){e.innerHTML=`<p class="err">O usuário precisa ter de 3 a 20 letras, números, ponto ou _.</p>`;return}
+    if(people.some(p=>p.handle===h&&p.uid!==uid)){e.innerHTML=`<p class="err">Esse usuário já existe. Escolha outro.</p>`;return}
+    me={uid,name:n,handle:h,bio:"",ts:Date.now(),seen:Date.now()};
+    try{await setDoc(D("users",uid),me)}catch(x){me=null;e.innerHTML=`<p class="err">Não foi possível criar o perfil (${esc(x.code||"erro")}). Confira as regras do Firestore.</p>`;return}
+    $("#gate").classList.add("hide");updateHead();render();
+  };
+}
+
+/* ---------- INÍCIO / DADOS ---------- */
+onAuthStateChanged(auth,u=>{
+  if(!u){user=null;uid="";me=null;ready=false;showLogin();return}
+  user=u;uid=u.uid;if(!started){started=true;start()}else if(!me)showSetup();
+});
+function start(){
+  let first=true;
+  sn(C("users"),a=>{
+    people=a;const mine=people.find(p=>p.uid===uid);
+    if(first){first=false;ready=true;if(mine){me={...mine};$("#gate").classList.add("hide");updateHead();render()}else showSetup()}
+    else if(tab==="chat"&&!dm){if(sub.chat==="people"&&drawPeople)drawPeople();else if(sub.chat==="convs")renderChat()}
+  });
+  setInterval(()=>{if(me)updateDoc(D("users",uid),{seen:Date.now()}).catch(()=>{})},60000);
+  sn(query(C("videos"),orderBy("ts","desc"),limit(60)),a=>{videos=a;if(tab==="post"&&sub.post==="mine")render();else soft()});
+  sn(C("likes"),a=>{likes=a;soft()});sn(C("saves"),a=>{saves=a;soft()});sn(C("follows"),a=>{follows=a;soft()});
+  sn(query(C("comments"),orderBy("ts","desc"),limit(300)),a=>{comments=a;soft()});
+  sn(C("lives"),a=>{lives=a;if(tab==="live"&&!watching&&!localStream&&sub.live==="watch")render()});
+  sn(query(C("general"),orderBy("ts","desc"),limit(150)),a=>{gen=a.map(x=>({...x,chat:"geral",_c:"general"}));rebuild()});
+  sn(query(C("dms"),where("a","==",uid)),a=>{dmA=a.map(x=>({...x,_c:"dms"}));rebuild()});
+  sn(query(C("dms"),where("b","==",uid)),a=>{dmB=a.map(x=>({...x,_c:"dms"}));rebuild()});
+  onSnapshot(query(C("signals"),where("to","==",tid)),s=>s.docChanges().forEach(ch=>{if(ch.type==="added"){const d=ch.doc.data();deleteDoc(ch.doc.ref).catch(()=>{});onSig(d)}}));
+}
+function rebuild(){
+  const seen={};[...dmA,...dmB].forEach(x=>seen[x.id]=x);
+  msgs=[...gen,...Object.values(seen),...liveMsgs].sort((a,b)=>a.ts-b.ts);
+  if(dm)drawMsgs();else if(tab==="chat"&&sub.chat==="convs")renderChat();
+  drawLiveChat();updateBadge();
+}
+function render(){
+  if(!ready||!me)return;const m=$("#main");
+  if(tab==="feed")renderFeed(m);else if(tab==="post")renderPost(m);
+  else if(tab==="live"){const n=activeLives().length;m.innerHTML=seg([["watch","Assistir"+(n?" ("+n+")":"")],["go","Transmitir"]])+`<div id="lv"></div>`;bindSeg();renderLive()}
+  else if(tab==="chat")renderChat();
+  else if(tab==="me")renderProfile(m,me,true);
+  else renderProfile(m,byUid(profUid)||me,profUid===uid);
+}
+function soft(){if(tab==="feed")drawFeed();else if(tab==="user"||tab==="me")render();if(sheetVid)drawSheet()}
+
+/* ---------- VÍDEOS ---------- */
+function vcard(v){return `<div class="post"><button class="who" data-u="${esc(v.uid)}">${ini(v.author,"sm",online(byUid(v.uid)))}<div><b>${esc(v.author)}</b><span class="mt">${ago(v.ts)}</span></div></button><video src="${esc(v.url)}" controls playsinline preload="metadata"></video><div class="cap">${fmt(v.title)}</div><div class="act">
+<button class="ib lk ${liked(v.id)?"on":""}" data-v="${v.id}" aria-label="Curtir"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.6-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.4-7 10-7 10z"/></svg>${likeCount(v.id)}</button>
+<button class="ib cmt" data-v="${v.id}" aria-label="Comentar"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H10l-4 4v-4H4z"/></svg>${comments.filter(c=>c.vid===v.id).length}</button>
+<button class="ib sv ${saved(v.id)?"on":""}" data-v="${v.id}" aria-label="Salvar"><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-4-6 4z"/></svg></button><span class="tag">${esc(v.cat||"Outros")}</span></div></div>`}
+function bindCards(r){
+  r.querySelectorAll(".lk").forEach(b=>b.onclick=()=>toggle("likes",liked(b.dataset.v),b.dataset.v));
+  r.querySelectorAll(".sv").forEach(b=>b.onclick=()=>toggle("saves",saved(b.dataset.v),b.dataset.v));
+  r.querySelectorAll(".cmt").forEach(b=>b.onclick=()=>{sheetVid=b.dataset.v;drawSheet()});
+  r.querySelectorAll(".who").forEach(b=>b.onclick=()=>openUser(b.dataset.u));
+  r.querySelectorAll(".ht").forEach(b=>b.onclick=()=>{search=b.dataset.q;sub.feed="foryou";go("feed")});
+}
+async function toggle(c,on,vid){const r=D(c,vid+"_"+uid);try{if(on)await deleteDoc(r);else await setDoc(r,{vid,uid})}catch(e){}}
+function renderFeed(m){
+  m.innerHTML=seg([["foryou","Para você"],["trending","Em alta"],["following","Seguindo"],["saved","Salvos"],["mine","Meus"]])+
+  `<div class="srch"><input id="sq" placeholder="Buscar vídeos, pessoas ou #tags" value="${esc(search)}"></div><div class="chips">`+["Todos",...CATS].map(c=>`<button class="chip ${catF===c?"on":""}" data-c="${c}">${c}</button>`).join("")+`</div><div id="fl"></div>`;
+  bindSeg();$("#sq").oninput=e=>{search=e.target.value;drawFeed()};
+  m.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{catF=b.dataset.c;m.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));drawFeed()});
+  drawFeed();
+}
+function drawFeed(){
+  const box=$("#fl");if(!box||tab!=="feed")return;
+  let l=videos.slice();const s=sub.feed;
+  if(s==="trending")l.sort((a,b)=>likeCount(b.id)-likeCount(a.id)||b.ts-a.ts);
+  if(s==="following")l=l.filter(v=>following(v.uid));
+  if(s==="saved")l=l.filter(v=>saved(v.id));
+  if(s==="mine")l=l.filter(v=>v.uid===uid);
+  if(catF!=="Todos")l=l.filter(v=>v.cat===catF);
+  const q=search.trim().toLowerCase().replace(/^#/,"");
+  if(q)l=l.filter(v=>(v.title+" "+v.author+" "+(v.cat||"")).toLowerCase().includes(q));
+  const msg={following:["Você não segue ninguém ainda","Toque no nome de um criador e escolha Seguir."],saved:["Nada salvo ainda","Toque no marcador de um vídeo para guardar aqui."],mine:["Você ainda não postou","Vá em Postar e publique seu primeiro vídeo."]}[s]||["Nenhum vídeo aqui","Mude a busca ou a categoria, ou publique o primeiro vídeo."];
+  box.innerHTML=l.length?l.map(vcard).join(""):`<div class="empty"><b>${msg[0]}</b>${msg[1]}</div>`;
+  bindCards(box);
+}
+function drawSheet(){
+  const s=$("#sheet");if(!sheetVid){s.classList.add("hide");return}
+  const keep=$("#ci")?.value||"",l=comments.filter(c=>c.vid===sheetVid).sort((a,b)=>a.ts-b.ts);
+  s.classList.remove("hide");
+  s.innerHTML=`<div class="sh"><div class="row" style="justify-content:space-between;margin-bottom:10px"><b>Comentários (${l.length})</b><button class="btn sec sm" id="cx">Fechar</button></div><div class="cl">${l.length?l.map(c=>`<div class="cm">${ini(c.author,"sm")}<div><b>${esc(c.author)}</b> <span class="mt">${ago(c.ts)}</span><br>${fmt(c.text)}</div></div>`).join(""):`<div class="empty" style="padding:30px 0"><b>Sem comentários</b>Seja o primeiro a comentar.</div>`}</div><div class="row"><input id="ci" maxlength="200" placeholder="Escreva um comentário" value="${esc(keep)}"><button class="btn sm" id="cs">Enviar</button></div></div>`;
+  $("#cx").onclick=()=>{sheetVid=null;drawSheet()};s.onclick=e=>{if(e.target===s){sheetVid=null;drawSheet()}};
+  const send=async()=>{const t=$("#ci").value.trim();if(!t)return;$("#ci").value="";try{await addDoc(C("comments"),{vid:sheetVid,uid,author:me.name,text:t,ts:Date.now()})}catch(e){}};
+  $("#cs").onclick=send;$("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
+  const c=s.querySelector(".cl");c.scrollTop=c.scrollHeight;
+}
+
+/* ---------- PERFIL ---------- */
+function renderProfile(m,u,isMe){
+  const vs=videos.filter(v=>v.uid===u.uid),fol=follows.filter(f=>f.b===u.uid).length,fing=follows.filter(f=>f.a===u.uid).length,lk=vs.reduce((a,v)=>a+likeCount(v.id),0);
+  m.innerHTML=`<div class="pad" style="background:var(--bg);text-align:center">${isMe?"":`<div style="text-align:left"><button class="btn sec sm" id="bk">← Voltar</button></div>`}${ini(u.name,"lg",online(u))}<h2 style="margin-top:10px">${esc(u.name)}</h2><div class="mt">@${esc(u.handle)} · ${online(u)?`<span style="color:var(--ok)">online</span>`:"visto "+ago(u.seen||u.ts)}</div>${u.bio?`<p style="margin:10px 0 0;line-height:1.45">${fmt(u.bio)}</p>`:""}
+  <div class="stats"><div><b>${vs.length}</b><span class="mt">vídeos</span></div><div><b>${fol}</b><span class="mt">seguidores</span></div><div><b>${fing}</b><span class="mt">seguindo</span></div><div><b>${lk}</b><span class="mt">curtidas</span></div></div>
+  ${isMe?`<input id="en" maxlength="24" value="${esc(u.name)}" placeholder="Nome"><input id="eb" maxlength="100" value="${esc(u.bio||"")}" placeholder="Sua bio (use #tags)"><button class="btn sec" id="sv">Salvar perfil</button><button class="btn sec" id="out" style="margin-top:10px">Sair da conta</button>`:`<div class="row"><button class="btn ${following(u.uid)?"sec":""}" id="fw">${following(u.uid)?"Seguindo":"Seguir"}</button><button class="btn sec" id="ms">Mensagem</button></div>`}</div>
+  <div class="seg"><button class="on">Vídeos</button></div><div id="fl">${vs.length?vs.map(vcard).join(""):`<div class="empty"><b>Nenhum vídeo</b>${isMe?"Publique pela aba Postar.":"Esta pessoa ainda não postou."}</div>`}</div>`;
+  bindCards(m);
+  if(isMe){$("#sv").onclick=async()=>{const n=$("#en").value.trim();if(n.length<2)return;me={...me,name:n,bio:$("#eb").value.trim()};try{await setDoc(D("users",uid),me)}catch(e){}updateHead();$("#sv").textContent="Perfil salvo"};$("#out").onclick=()=>signOut(auth)}
+  else{$("#bk").onclick=()=>go(prevTab);$("#fw").onclick=()=>{const r=D("follows",uid+"_"+u.uid);following(u.uid)?deleteDoc(r):setDoc(r,{a:uid,b:u.uid})};
+    $("#ms").onclick=()=>{sub.chat="convs";tab="chat";document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x.dataset.t==="chat"));openDm(chatKey(u.uid),u.name,u.uid)}}
+}
+
+/* ---------- POSTAR (envio via Cloudinary) ---------- */
+function renderPost(m){
+  const s=sub.post,bar=seg([["gal","Galeria"],["cam","Gravar"],["mine","Meus envios"]]);
+  if(s==="mine"){
+    const l=videos.filter(v=>v.uid===uid);
+    m.innerHTML=bar+(l.length?l.map(v=>`<div class="item"><div class="grow"><b>${esc(v.title)}</b><span class="mt">${esc(v.cat||"Outros")} · ${ago(v.ts)} · ${likeCount(v.id)} curtidas · ${comments.filter(c=>c.vid===v.id).length} comentários</span></div><button class="btn red sm" data-d="${v.id}">Apagar</button></div>`).join(""):`<div class="empty"><b>Nada enviado ainda</b>Seus vídeos publicados aparecem aqui.</div>`);
+    bindSeg();m.querySelectorAll("[data-d]").forEach(b=>b.onclick=async()=>{if(confirm("Apagar este vídeo?"))try{await deleteDoc(D("videos",b.dataset.d))}catch(e){}});return}
+  const cam=s==="cam";
+  m.innerHTML=bar+`<div class="pad"><input id="fi" type="file" accept="video/*" ${cam?'capture="environment"':""} class="hide">
+  <button class="drop" id="pk"><b>${cam?"Gravar com a câmera":"Escolher da galeria"}</b>${cam?"Toque para abrir a câmera":"Toque para selecionar um vídeo"}</button><div id="prev"></div>
+  <span class="lbl">Legenda</span><input id="vt" maxlength="120" placeholder="Escreva algo e use #hashtags">
+  <span class="lbl">Categoria</span><div class="row" style="flex-wrap:wrap;margin-bottom:16px">${CATS.map(c=>`<button class="chip ${pickCat===c?"on":""}" data-c="${c}">${c}</button>`).join("")}</div>
+  <button class="btn" id="vgo">Publicar</button><div class="bar hide" id="pb"><i></i></div><p class="mt" id="vst">Vídeos de até 100 MB.</p></div>`;
+  bindSeg();$("#pk").onclick=()=>$("#fi").click();
+  $("#fi").onchange=e=>{picked=e.target.files[0];if(picked){$("#pk").innerHTML=`<b>${esc(picked.name)}</b>${(picked.size/1048576).toFixed(1)} MB · toque para trocar`;$("#prev").innerHTML=`<video src="${URL.createObjectURL(picked)}" controls playsinline style="width:100%;max-height:36vh;border-radius:14px;margin-bottom:14px;background:#000"></video>`}};
+  m.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{pickCat=b.dataset.c;m.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b))});
+  $("#vgo").onclick=postVideo;
+}
+function upload(file,onp){return new Promise((ok,no)=>{
+  const x=new XMLHttpRequest(),f=new FormData();f.append("file",file);f.append("upload_preset",CLOUDINARY.preset);
+  x.open("POST",`https://api.cloudinary.com/v1_1/${CLOUDINARY.cloud}/video/upload`);
+  x.upload.onprogress=e=>e.lengthComputable&&onp(e.loaded/e.total);
+  x.onload=()=>{try{const r=JSON.parse(x.responseText);r.secure_url?ok(r.secure_url):no(new Error(r.error?.message||"falha no envio"))}catch(e){no(e)}};
+  x.onerror=()=>no(new Error("sem conexão"));x.send(f)})}
+async function postVideo(){
+  const t=$("#vt").value.trim(),st=$("#vst");
+  if(!picked||!t){st.textContent="Escolha um vídeo e escreva uma legenda.";return}
+  if(picked.size>104857600){st.innerHTML=`<span class="err">O vídeo passa de 100 MB.</span>`;return}
+  if(!String(CLOUDINARY.cloud).trim()||CLOUDINARY.cloud==="COLE_AQUI"){st.innerHTML=`<span class="err">Configure o Cloudinary no index.html para enviar vídeos.</span>`;return}
+  $("#vgo").disabled=true;$("#pb").classList.remove("hide");st.textContent="Enviando…";
+  try{const url=await upload(picked,p=>{$("#pb i").style.width=Math.round(p*100)+"%";st.textContent="Enviando… "+Math.round(p*100)+"%"});
+    await addDoc(C("videos"),{url,title:t,cat:pickCat,author:me.name,uid,ts:Date.now()});
+    picked=null;search="";sub.feed="foryou";go("feed");
+  }catch(e){st.innerHTML=`<span class="err">Erro ao enviar: ${esc(e.message||"tente de novo")}</span>`;$("#vgo").disabled=false}
+}
+
+/* ---------- LIVES (WebRTC, sinalização pelo Firestore) ---------- */
+const activeLives=()=>lives.filter(l=>l.live&&Date.now()-(l.beat||l.ts)<90000&&l.uid!==uid);
+const liveKey=()=>"live_"+(watching?watching.tid:tid);
+function subLiveChat(lid){if(unsubLC)unsubLC();liveMsgs=[];if(!lid){unsubLC=null;rebuild();return}
+  unsubLC=onSnapshot(query(C("livechat"),where("lid","==",lid)),s=>{liveMsgs=s.docs.map(d=>({...d.data(),id:d.id,chat:"live_"+lid,_c:"livechat"}));rebuild()})}
+const liveChat=()=>`<div id="lm" style="max-height:28vh;overflow-y:auto;margin:14px 0 10px"></div><div class="row"><input id="li" maxlength="200" placeholder="Comente na live"><button class="btn sm" id="ls">Enviar</button></div>`;
+function bindLiveChat(){const send=async()=>{const t=$("#li").value.trim();if(!t)return;$("#li").value="";try{await addDoc(C("livechat"),{lid:liveKey().slice(5),text:t,author:me.name,uid,ts:Date.now()})}catch(e){}};$("#ls").onclick=send;$("#li").onkeydown=e=>{if(e.key==="Enter")send()};drawLiveChat()}
+function drawLiveChat(){const b=$("#lm");if(!b)return;const l=msgs.filter(x=>x.chat===liveKey());b.innerHTML=l.length?l.map(x=>`<div style="margin-bottom:6px"><b>${esc(x.author)}</b> ${esc(x.text)}</div>`).join(""):`<span class="mt">Os comentários da live aparecem aqui.</span>`;b.scrollTop=b.scrollHeight}
+function renderLive(){
+  const box=$("#lv");if(tab!=="live"||!box)return;
+  if(watching){
+    box.innerHTML=`<div class="pad"><div class="live" style="margin-bottom:10px">Ao vivo · ${esc(watching.title)}</div><video id="wv" autoplay playsinline controls style="width:100%;border-radius:14px;background:#000;margin-bottom:12px"></video><button class="btn sec" id="leave">Sair da live</button><p class="mt" id="wst">Conectando…</p>${liveChat()}</div>`;
+    $("#leave").onclick=leaveLive;if(viewStream)$("#wv").srcObject=viewStream;bindLiveChat();return}
+  if(sub.live==="go"){
+    box.innerHTML=localStream
+      ?`<div class="pad"><div class="live" style="margin-bottom:10px">Você está ao vivo · ${Object.keys(pcs).length} assistindo</div><video id="pv" autoplay muted playsinline style="width:100%;border-radius:14px;background:#000;margin-bottom:12px"></video><button class="btn red" id="stop">Encerrar live</button>${liveChat()}</div>`
+      :`<div class="pad"><span class="lbl">Título da live</span><input id="lt" maxlength="60" placeholder="Sobre o que você vai falar?"><span class="lbl">Categoria</span><div class="row" style="flex-wrap:wrap;margin-bottom:16px">${CATS.map(c=>`<button class="chip ${liveCat===c?"on":""}" data-c="${c}">${c}</button>`).join("")}</div><button class="btn red" id="go">Iniciar live</button>${liveErr?`<p class="err" style="margin-top:12px">${esc(liveErr)}</p>`:""}</div>`;
+    if(localStream){$("#pv").srcObject=localStream;$("#stop").onclick=stopLive;bindLiveChat()}else{$("#go").onclick=startLive;box.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{liveCat=b.dataset.c;box.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b))})}
+    return}
+  const o=activeLives();
+  box.innerHTML=o.length?o.map((l,i)=>`<button class="item" data-i="${i}">${ini(l.author,"",true)}<div class="grow"><b>${esc(l.title)}</b><span class="live">${esc(l.author)}</span></div><span class="tag">${esc(l.cat||"Outros")}</span></button>`).join(""):`<div class="empty"><b>Ninguém ao vivo agora</b>Quando alguém iniciar uma live, ela aparece aqui. Que tal ser o primeiro?</div>`;
+  box.querySelectorAll(".item").forEach(b=>b.onclick=()=>watchLive(o[+b.dataset.i]));
+}
+async function startLive(){
+  liveErr="";const t=$("#lt").value.trim()||"Live de "+me.name;
+  try{localStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:true})}
+  catch(e){localStream=null;liveErr="Não foi possível abrir a câmera ("+(e.name||"erro")+"). Permita câmera e microfone no navegador.";return renderLive()}
+  liveRef=doc(C("lives"));
+  await setDoc(liveRef,{title:t,cat:liveCat,author:me.name,uid,tid,live:true,ts:Date.now(),beat:Date.now()});
+  liveBeat=setInterval(()=>updateDoc(liveRef,{beat:Date.now()}).catch(()=>{}),30000);
+  subLiveChat(tid);renderLive();
+}
+async function stopLive(){
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null}
+  Object.values(pcs).forEach(p=>p.close());pcs={};clearInterval(liveBeat);
+  try{if(liveRef)await updateDoc(liveRef,{live:false})}catch(e){}
+  liveRef=null;subLiveChat(null);renderLive();
+}
+addEventListener("pagehide",()=>{try{if(liveRef)updateDoc(liveRef,{live:false})}catch(e){}});
+const sig=(to,k,body={})=>addDoc(C("signals"),{to,from:tid,k,body:JSON.stringify(body),ts:Date.now()}).catch(()=>{});
+async function flush(pc){for(const c of pc._q||[])try{await pc.addIceCandidate(c)}catch(e){}pc._q=[]}
+async function onSig(d){
+  const b=JSON.parse(d.body||"{}");
+  if(d.k==="watch"&&localStream){
+    const pc=new RTCPeerConnection(ICE);pcs[d.from]=pc;
+    localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+    pc.onicecandidate=e=>e.candidate&&sig(d.from,"ice",e.candidate.toJSON());
+    pc.onconnectionstatechange=()=>{if(["closed","failed","disconnected"].includes(pc.connectionState))delete pcs[d.from]};
+    await pc.setLocalDescription(await pc.createOffer());
+    sig(d.from,"offer",pc.localDescription.toJSON());
+  }else if(d.k==="offer"&&viewPc){
+    await viewPc.setRemoteDescription(b);await flush(viewPc);
+    await viewPc.setLocalDescription(await viewPc.createAnswer());
+    sig(d.from,"answer",viewPc.localDescription.toJSON());
+  }else if(d.k==="answer"&&pcs[d.from]){await pcs[d.from].setRemoteDescription(b);await flush(pcs[d.from])}
+  else if(d.k==="ice"){const pc=pcs[d.from]||viewPc;if(pc){if(pc.remoteDescription)try{await pc.addIceCandidate(b)}catch(e){}else(pc._q=pc._q||[]).push(b)}}
+}
+function watchLive(l){
+  watching=l;viewStream=null;subLiveChat(l.tid);
+  viewPc=new RTCPeerConnection(ICE);
+  viewPc.ontrack=e=>{viewStream=e.streams[0];const v=$("#wv");if(v){v.srcObject=viewStream;if($("#wst"))$("#wst").textContent=""}};
+  viewPc.onicecandidate=e=>e.candidate&&sig(l.tid,"ice",e.candidate.toJSON());
+  renderLive();sig(l.tid,"watch");
+  setTimeout(()=>{if(watching&&!viewStream&&$("#wst"))$("#wst").textContent="Ainda conectando. Se não aparecer, saia e entre de novo."},9000);
+}
+function leaveLive(){if(viewPc)viewPc.close();viewPc=null;viewStream=null;watching=null;subLiveChat(null);renderLive()}
+
+/* ---------- MENSAGENS ---------- */
+const chatKey=o=>[uid,o].sort().join("_");
+function openDm(key,title,other){dm={key,title,other};renderChat()}
+function renderChat(){
+  if(tab!=="chat")return;const m=$("#main");
+  const bar=seg([["convs","Conversas"],["people","Pessoas"],["geral","Geral"]]);
+  if(!dm&&sub.chat==="geral")dm={key:"geral",title:"Geral",geral:true};
+  if(dm){
+    const p=dm.other?byUid(dm.other):null;
+    m.innerHTML=`<div class="fill" style="display:flex;flex-direction:column"><div class="row" style="padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--bd)"><button class="btn sec sm" id="back" aria-label="Voltar">←</button>${dm.geral?`<span class="av sm" style="background:var(--lv)">#</span>`:ini(dm.title,"sm",online(p))}<div class="grow"><b>${esc(dm.title)}</b><div class="mt">${dm.geral?"Conversa aberta com todos":online(p)?"online":p?"visto "+ago(p.seen||p.ts):""}</div></div></div><div id="msgs" style="flex:1;min-height:0;overflow-y:auto;padding:14px 16px"></div><div class="emo">${EMO.map(e=>`<button data-e="${e}">${e}</button>`).join("")}</div><div class="row" style="padding:10px 16px;background:var(--bg)"><input id="mi" placeholder="Escreva uma mensagem"><button class="btn" id="ms">Enviar</button></div></div>`;
+    $("#back").onclick=()=>{dm=null;if(sub.chat==="geral")sub.chat="convs";renderChat()};
+    $("#ms").onclick=()=>sendMsg();$("#mi").onkeydown=e=>{if(e.key==="Enter")sendMsg()};
+    m.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>sendMsg(b.dataset.e));drawMsgs();return}
+  if(sub.chat==="people"){
+    m.innerHTML=bar+`<div class="srch"><input id="sp" placeholder="Buscar por nome ou @usuário"></div><div id="pl"></div>`;bindSeg();
+    drawPeople=()=>{const q=($("#sp")?.value||"").toLowerCase().replace("@",""),o=people.filter(p=>p.uid!==uid&&(p.name.toLowerCase().includes(q)||p.handle.includes(q)));
+      const pl=$("#pl");if(!pl)return;
+      pl.innerHTML=o.length?o.map((p,i)=>`<button class="item" data-i="${i}">${ini(p.name,"",online(p))}<div class="grow"><b>${esc(p.name)}</b><span class="mt">@${esc(p.handle)}${p.bio?" · "+esc(p.bio):""}</span></div></button>`).join(""):`<div class="empty"><b>${people.length>1?"Ninguém encontrado":"Você é o primeiro por aqui"}</b>${people.length>1?"Tente outro nome.":"Compartilhe o link para outras pessoas entrarem."}</div>`;
+      pl.querySelectorAll(".item").forEach(b=>b.onclick=()=>{const p=o[+b.dataset.i];openDm(chatKey(p.uid),p.name,p.uid)})};
+    $("#sp").oninput=drawPeople;drawPeople();return}
+  drawPeople=null;
+  const map={};msgs.filter(x=>x.b&&(x.a===uid||x.b===uid)).forEach(x=>{map[x.chat]=x});
+  const cv=Object.values(map).map(last=>{const ou=last.a===uid?last.b:last.a,p=byUid(ou);return{k:last.chat,last,ou,p,name:p?p.name:"Usuário"}}).sort((a,b)=>b.last.ts-a.last.ts);
+  m.innerHTML=bar+(cv.length?cv.map((c,i)=>{const n=unread(c.k);return `<button class="item" data-i="${i}">${ini(c.name,"",online(c.p))}<div class="grow"><b>${esc(c.name)}</b><span class="mt">${c.last.uid===uid?"Você: ":""}${esc(c.last.text)}</span></div><div style="text-align:right"><div class="mt">${ago(c.last.ts)}</div>${n?`<span class="badge">${n}</span>`:""}</div></button>`}).join(""):`<div class="empty"><b>Nenhuma conversa ainda</b>Abra a aba Pessoas e mande a primeira mensagem.</div>`);
+  bindSeg();m.querySelectorAll(".item").forEach(b=>b.onclick=()=>{const c=cv[+b.dataset.i];openDm(c.k,c.name,c.ou)});
+}
+function drawMsgs(){
+  const b=$("#msgs");if(!b||!dm)return;const l=msgs.filter(x=>x.chat===dm.key);
+  b.innerHTML=l.length?l.map(x=>`<div class="msg ${x.uid===uid?"mine":""}" ${x.uid===uid?`data-id="${x.id}" data-c="${x._c}"`:""}>${dm.geral&&x.uid!==uid?`<b>${esc(x.author)}</b><br>`:""}${esc(x.text)}<small>${hm(x.ts)}</small></div>`).join(""):`<div class="empty"><b>Nenhuma mensagem</b>Envie a primeira.</div>`;
+  b.scrollTop=b.scrollHeight;LR[dm.key]=Date.now();save();updateBadge();
+  b.querySelectorAll("[data-id]").forEach(e=>e.onclick=async()=>{if(confirm("Apagar esta mensagem?"))try{await deleteDoc(D(e.dataset.c,e.dataset.id))}catch(x){}});
+}
+async function sendMsg(text){
+  const i=$("#mi"),t=(text||i.value).trim();if(!t||!dm)return;if(!text)i.value="";
+  const d={text:t.slice(0,500),author:me.name,uid,ts:Date.now()};
+  try{if(dm.geral)await addDoc(C("general"),d);else await addDoc(C("dms"),{...d,chat:dm.key,a:uid,b:dm.other})}catch(e){}
+}
+</script>
+</body>
+</html>
